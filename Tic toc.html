@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src= "jquery-3.6.0.min.js">
+</script>
+<style>
+body{
+    background-image: linear-gradient(to right, rgb(0, 238, 255) , rgb(202, 106, 28));
+      font-family:Cursive ;
+
+}
+      
+.content {
+    text-align : center;
+    max-width: 500px;
+    margin: auto;
+    background-color : #0076fd;
+    border-radius: 5%;
+    }
+button {
+    height: 80px;
+    width: 80px;
+    background-color: #e2e2e2;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin: 4px;
+    padding: 4px;
+    }
+.o-check
+    {
+    background-image: url("o32.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    }
+.x-check
+    {
+    background-image: url("x32.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    }
+
+.reset {
+    
+padding: 8px;
+color: #fff;
+background-color: #b13788;
+border-color: #2e6da4;
+display: inline-block;
+margin-bottom: 0;
+font-weight: 400;
+text-align: center;
+white-space: nowrap;
+vertical-align: middle;
+-ms-touch-action: manipulation;
+touch-action: manipulation;
+cursor: pointer;
+background-image: none;
+border: 1px solid transparent;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+border-radius: 2%;
+border-radius: 4px;
+}
+.reset:hover {
+opacity: 0.8;
+}
+    </style>
+</head>
+<body>
+<div class="content">
+<div>
+<h1>TIC-TAC-TOE</h1>
+</div>
+<br>
+<div>
+
+<h4 id="screen">
+PLAYER 1 TURN FOLLOWS
+</h4>
+</div>
+<br>
+<center>
+<table>
+<tr>
+<td>
+<button class="sq1 r"></button>
+</td>
+<td>
+<button class="sq2 r"></button>
+</td>
+<td>
+<button class="sq3 r"></button>
+</td>
+</tr>
+<tr>
+    <td>
+    <button class="sq4 r"></button>
+    </td>
+    <td>
+    <button class="sq5 r"></button>
+    </td>
+    <td>
+    <button class="sq6 r"></button>
+    </td>
+</tr>
+    <tr>
+        <td>
+        <button class="sq7 r"></button>
+        </td>
+        <td>
+        <button class="sq8 r"></button>
+        </td>
+        <td>
+        <button class="sq9 r"></button>
+        </td>
+</tr>
+</table>
+</center><br>
+<input type="reset" class="reset" value="RESET">
+</div>
+<script>
+$(document).ready(function(){
+    $(".reset").click(function(){
+        $("button").each(function(){
+            $(this).removeClass("x-check")
+            $(this).removeClass("o-check")
+            $("button").prop("disabled",false)
+            $("button").css("background-color","white")
+        })
+    })
+})
+var turn = 1;
+
+$("button").click(function() {
+    if(turn == 1) {
+    $("#screen").text("PLAYER 2 TURN");
+    $(this).addClass("o-check");
+    turn = 2;	
+    if (!check("o-check"))
+    {$(this).css("background-color","red")
+    setTimeout(()=>{$(this).css("background-color","white")}, 500)}
+    else{$("button").prop("disabled",true); $("#screen").text("PLAYER 2 win")}
+    }
+    else{
+        $("#screen").text("PLAYER 1 TURN");
+    $(this).addClass("x-check");
+    turn = 1;
+    if (!check("x-check"))
+    {$(this).css("background-color","red")
+    setTimeout(()=>{$(this).css("background-color","white")}, 500)}
+    else{$("button").prop("disabled",true); $("#screen").text("PLAYER 1 win")}
+    }
+}
+    
+    
+    
+);
+
+function check(symbol){
+    if ($(".sq1").hasClass(symbol) &&
+		$(".sq2").hasClass(symbol) &&
+		$(".sq3").hasClass(symbol))
+	{$(".sq1").css("background-color","green");
+    $(".sq2").css("background-color","green")
+    $(".sq3").css("background-color","green")
+    return true;} 
+    else if ($(".sq4").hasClass(symbol)
+			&& $(".sq5").hasClass(symbol)
+			&& $(".sq6").hasClass(symbol))
+	{$(".sq4").css("background-color","green");
+    $(".sq5").css("background-color","green")
+    $(".sq6").css("background-color","green");return true;}
+    else if ($(".sq7").hasClass(symbol)
+			&& $(".sq8").hasClass(symbol)
+			&& $(".sq9").hasClass(symbol))
+	{$(".sq7").css("background-color","green");
+    $(".sq8").css("background-color","green")
+    $(".sq9").css("background-color","green");return true}
+    else if ($(".sq1").hasClass(symbol)
+			&& $(".sq4").hasClass(symbol)
+			&& $(".sq7").hasClass(symbol))
+	{$(".sq1").css("background-color","green");
+    $(".sq4").css("background-color","green")
+    $(".sq7").css("background-color","green");return true;}
+     else if ($(".sq2").hasClass(symbol)
+			&& $(".sq5").hasClass(symbol)
+			&& $(".sq8").hasClass(symbol))
+	{$(".sq2").css("background-color","green");
+    $(".sq5").css("background-color","green")
+    $(".sq8").css("background-color","green");return true;} 
+    else if ($(".sq3").hasClass(symbol)
+			&& $(".sq6").hasClass(symbol)
+			&& $(".sq9").hasClass(symbol))
+	{$(".sq3").css("background-color","green");
+    $(".sq6").css("background-color","green")
+    $(".sq9").css("background-color","green");return true;
+	} else if ($(".sq1").hasClass(symbol)
+			&& $(".sq5").hasClass(symbol)
+			&& $(".sq9").hasClass(symbol))
+	{$(".sq1").css("background-color","green");
+    $(".sq5").css("background-color","green")
+    $(".sq9").css("background-color","green");return true;
+	} else if ($(".sq3").hasClass(symbol)
+			&& $(".sq5").hasClass(symbol)
+			&& $(".sq7").hasClass(symbol))
+	{$(".sq3").css("background-color","green");
+    $(".sq5").css("background-color","green")
+    $(".sq7").css("background-color","green");return true;} 
+    return false;};
+
+        
+</script>
+</body>
+</html>
